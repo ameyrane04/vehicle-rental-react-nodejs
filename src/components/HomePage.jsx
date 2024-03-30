@@ -12,9 +12,10 @@ import('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.c
 function HomePage() {
   const vehicles = useSelector(state => state.vehicles);
   const images = [
-    "../images/903993.png",
-    "../images/wp3867561.jpg",
-    "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+    "https://www.cars-4-hire.co.za/images/slides/banner1.jpg",
+    "https://gulliveradventures.com/wp-content/uploads/2018/06/bike-on-rent-manali-price.jpg",
+    "https://img.freepik.com/free-vector/car-rental-concept-illustration_114360-9267.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1711065600&semt=ais"
+
   ];
 
   return (
@@ -22,18 +23,18 @@ function HomePage() {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen p-6 text-brandYellow bg-brandBlack">
         <Slide duration={3000} indicators={true} autoplay={true}>
           <div className="each-slide-effect">
-            <div className='flex items-center justify-center h-[350px] bg-cover' style={{ 'backgroundImage': `url(${images[0]})` }}>
-              <span className='p-5 text-xl bg-gray-200 text-center'>Slide 1</span>
+            <div className='flex items-center justify-center h-[350px] bg-cover' style={{ 'backgroundImage': `url(${images[0]})`}}>
+              {/* <span className='p-5 text-xl bg-gray-200 text-center'>Slide 1</span> */}
             </div>
           </div>
           <div className="each-slide-effect">
             <div className='flex items-center justify-center h-[350px] bg-cover' style={{ 'backgroundImage': `url(${images[1]})` }}>
-              <span className='p-5 text-xl bg-gray-200 text-center'>Slide 2</span>
+              {/* <span className='p-5 text-xl bg-gray-200 text-center'>Slide 2</span> */}
             </div>
           </div>
           <div className="each-slide-effect">
-            <div className='flex items-center justify-center h-[350px] bg-cover' style={{ 'backgroundImage': `url(${images[2]})` }}>
-              <span className='p-5 text-xl bg-gray-200 text-center'>Slide 3</span>
+            <div className='flex items-center justify-center h-[350px] bg-cover' style={{ 'backgroundImage': `url(${images[2]})`,'backgroundSize': 'contain' }}>
+              {/* <span className='p-5 text-xl bg-gray-200 text-center'>Slide 3</span> */}
             </div>
           </div>
         </Slide>

@@ -7,6 +7,9 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        'fancy': ['Montserrat', 'sans-serif'], // Add your custom font
+      },
       colors: {
         brandYellow: '#fbbf24', // Example yellow shade
         brandBlack: '#000', // Black

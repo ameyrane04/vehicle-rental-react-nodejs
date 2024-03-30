@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // Placeholder data for vehicles in the 4-wheelers category
@@ -10,6 +10,10 @@ function FourWheelersPage() {
 
   // A copy of vehicles to filter for search without altering the original state
   const [displayVehicles, setDisplayVehicles] = useState(vehicles);
+
+  useEffect(() => {
+    setDisplayVehicles(vehicles);
+  }, [vehicles])
 
   // Handle search functionality
   const handleSearch = (event) => {
@@ -42,7 +46,7 @@ function FourWheelersPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {vehicles.map((vehicle) => (
+        {displayVehicles.map((vehicle) => (
           <div key={vehicle.id} className="bg-gray-700 border border-gray-600 p-4 shadow-lg rounded-lg flex flex-col items-center text-center">
             <img src={vehicle.imageUrl} alt={vehicle.name} className="object-cover rounded-lg mb-4 w-full h-64" />
             <h2 className="text-xl font-semibold">{vehicle.name}</h2>

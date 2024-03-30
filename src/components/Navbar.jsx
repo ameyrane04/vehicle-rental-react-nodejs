@@ -3,17 +3,16 @@ import { NavLink } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <nav className="bg-blue-500 w-full text-white p-4 shadow-md">
-      <div className="container mx-auto flex justify-center md:justify-between">
-        <div className="hidden md:block">
-          <NavLink to="/" className="mr-4 hover:text-yellow-300">Home</NavLink>
-          <NavLink to="/categories" className="mr-4 hover:text-yellow-300">Categories</NavLink>
-          <NavLink to="/about" className="mr-4 hover:text-yellow-300">About</NavLink>
-          <NavLink to="/contact" className="mr-4 hover:text-yellow-300">Contact</NavLink>
-          <NavLink to="/Login/Signup" className="hover:text-yellow-300">Login/Sign Up</NavLink>
+    <nav className="bg-gradient-to-r from-black to-brandYellow shadow-md">
+      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+        <NavLink to="/" className="text-white text-2xl font-bold font-fancy">RAG</NavLink>
+        <div className="flex gap-4">
+          <NavLink to="/" className="text-white hover:text-black font-semibold text-lg transition duration-300 font-fancy">Home</NavLink>
+          <NavLink to="/categories" className="text-white hover:text-black font-semibold text-lg transition duration-300 font-fancy">Categories</NavLink>
+          <NavLink to="/about" className="text-white hover:text-black font-semibold text-lg transition duration-300 font-fancy">About</NavLink>
+          <NavLink to="/contact" className="text-white hover:text-black font-semibold text-lg transition duration-300 font-fancy">Contact</NavLink>
+          <NavLink to="/login/signup" className="text-white hover:text-black font-semibold text-lg transition duration-300 font-fancy">Login/Sign Up</NavLink>
         </div>
-        {/* Mobile menu icon placeholder */}
-        <div className="md:hidden">Menu</div>
       </div>
     </nav>
   );

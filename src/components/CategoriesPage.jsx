@@ -5,7 +5,7 @@ function CategoriesPage() {
   // Placeholder categories data
   const categories = [
     {
-      id: 'two-wheelers',
+      id: 'bikes',
       name: '2 Wheelers',
       description: 'Explore our range of bikes and scooters.',
       imageUrl: 'https://wallpaperboat.com/wp-content/uploads/2020/07/13/49859/motorcycle-16.jpg'
