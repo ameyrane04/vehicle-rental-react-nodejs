@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function BikeDetailsPage() {
     const bikes = useSelector(state => state.bikes);
     const { id } = useParams();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         pickupLocation: '',
         dropLocation: '',
@@ -25,7 +27,10 @@ function BikeDetailsPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const totalFare = formData.kilometers * bike.farePricePerKm;
-        console.log(`Total Fare: $${totalFare}`);
+        const gstCharges = totalFare * 0.18; // Example GST calculation
+        const finalAmount = totalFare + gstCharges;
+        navigate('/checkout', { state: { totalFare: finalAmount, formData, vehicle: bike } });
+
         // Implement booking logic here
     };
 

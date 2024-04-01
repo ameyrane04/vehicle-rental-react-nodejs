@@ -1,15 +1,18 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion'; // Assuming Framer Motion is added for animations
 import ReviewsSection from './ReviewsSection';
+import { useAuth } from '../hooks/useAuth';
 
 import('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
 
 
 function HomePage() {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const vehicles = useSelector(state => state.vehicles);
   const images = [
     "https://www.cars-4-hire.co.za/images/slides/banner1.jpg",
@@ -18,12 +21,20 @@ function HomePage() {
 
   ];
 
+  const handleRent = (vehicleId) => {
+    if (!isAuthenticated) {
+      navigate('/Login/Signup'); // Redirect to the login/signup page
+    } else {
+      navigate(`/vehicles/${vehicleId}`); // Proceed to vehicle detail page
+    }
+  };
+
   return (
     <>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen p-6 text-brandYellow bg-brandBlack">
         <Slide duration={3000} indicators={true} autoplay={true}>
           <div className="each-slide-effect">
-            <div className='flex items-center justify-center h-[350px] bg-cover' style={{ 'backgroundImage': `url(${images[0]})`}}>
+            <div className='flex items-center justify-center h-[350px] bg-cover' style={{ 'backgroundImage': `url(${images[0]})` }}>
               {/* <span className='p-5 text-xl bg-gray-200 text-center'>Slide 1</span> */}
             </div>
           </div>
@@ -33,7 +44,7 @@ function HomePage() {
             </div>
           </div>
           <div className="each-slide-effect">
-            <div className='flex items-center justify-center h-[350px] bg-cover' style={{ 'backgroundImage': `url(${images[2]})`,'backgroundSize': 'contain' }}>
+            <div className='flex items-center justify-center h-[350px] bg-cover' style={{ 'backgroundImage': `url(${images[2]})`, 'backgroundSize': 'contain' }}>
               {/* <span className='p-5 text-xl bg-gray-200 text-center'>Slide 3</span> */}
             </div>
           </div>
@@ -93,13 +104,12 @@ function HomePage() {
                 <img src={vehicle.imageUrl} alt={vehicle.name} className="w-full h-48 object-cover mb-2" />
                 <h3 className="text-xl font-semibold">{vehicle.name}</h3>
                 <p className="my-2">Fare: ${vehicle.farePricePerKm} / km</p>
-                <NavLink
-                  to={`/vehicles/${vehicle.id}`}
+                <button
+                  onClick={() => handleRent(vehicle.id)}
                   className="mt-auto w-96 bg-brandYellow text-black p-2 hover:bg-gray-900 hover:text-white rounded-lg flex justify-center items-center"
                 >
                   Rent
-                </NavLink>
-
+                </button>
               </div>
             ))}
           </div>

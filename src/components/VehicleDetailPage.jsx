@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom'; // To access URL params
+import { NavLink, useNavigate, useParams } from 'react-router-dom'; // To access URL params
 import { useSelector } from 'react-redux';
 
 function VehicleDetailPage() {
     const vehicles = useSelector(state => state.vehicles);
     const { id } = useParams(); // Get vehicle ID from URL
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         pickupLocation: '',
         dropLocation: '',
@@ -28,12 +29,18 @@ function VehicleDetailPage() {
         // console.log(formData)
     };
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log('handleSubmit is called');
+
         // Calculate total fare based on formData.kilometers and vehicle.farePricePerKm
         const totalFare = formData.kilometers * vehicle.farePricePerKm;
+        const gstCharges = totalFare * 0.18; // Example GST calculation
+        const finalAmount = totalFare + gstCharges;
         console.log(`Total Fare: $${totalFare}`);
-        // Implement booking logic here
+        navigate('/checkout', { state: { totalFare: finalAmount, formData, vehicle } });
+
     };
 
     return (
@@ -128,11 +135,9 @@ function VehicleDetailPage() {
                             onChange={handleChange}
                         />
                     </div>
-                    <NavLink to={'/checkout'}>
-                        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Book Vehicle
-                        </button>
-                    </NavLink>
+                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Book Vehicle
+                    </button>
                 </form>
             </div>
 

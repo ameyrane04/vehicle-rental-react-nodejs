@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useAuth } from '../hooks/useAuth';
 // Placeholder data for vehicles in the 4-wheelers category
 
 
 function FourWheelersPage() {
+  const navigate = useNavigate();
   const vehicles = useSelector(state => state.vehicles);
   const [searchTerm, setSearchTerm] = useState('');
-
+  const {isAuthenticated} = useAuth();
   // A copy of vehicles to filter for search without altering the original state
   const [displayVehicles, setDisplayVehicles] = useState(vehicles);
 
@@ -29,6 +31,13 @@ function FourWheelersPage() {
     }
   };
 
+  const handleRent = (vehicleId) => {
+    if (!isAuthenticated) {
+      navigate('/Login/Signup'); // Redirect to the login/signup page
+    } else {
+      navigate(`/vehicles/${vehicleId}`); // Proceed to vehicle detail page
+    }
+  };
 
   return (
     <div className="bg-gray-800 text-white min-h-screen p-6">
@@ -52,12 +61,12 @@ function FourWheelersPage() {
             <h2 className="text-xl font-semibold">{vehicle.name}</h2>
             <p>{vehicle.description}</p>
             <span className="text-sm text-gray-400">{vehicle.type} - ${vehicle.farePricePerKm}/KM</span>
-            <NavLink
-              to={`/vehicles/${vehicle.id}`}
+            <button
+              onClick={() => handleRent(vehicle.id)}
               className="mt-auto w-96 bg-black text-white p-2 hover:bg-gray-900 rounded-lg flex justify-center items-center"
             >
               Rent
-            </NavLink>
+            </button>
 
           </div>
         ))}

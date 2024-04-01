@@ -13,6 +13,7 @@ import BikeDetailsPage from './components/BikeDetailsPage.jsx';
 import TrucksPage from './components/TrucksPage.jsx';
 import TruckDetailsPage from './components/TruckDetailsPage.jsx';
 import CheckoutPage from './components/CheckoutPage.jsx';
+import DeliveryInfoPage from './components/DeliveryInfoPage.jsx';
 
 // Import other page components 
 
@@ -34,6 +35,7 @@ function App() {
         <Route path='trucks' element={<TrucksPage/>}/>
         <Route path='trucks/:id' element={<TruckDetailsPage/>}/>
         <Route path='checkout' element={<CheckoutPage/>}/>
+        <Route path='/delivery-info' element={<DeliveryInfoPage/>}/>
       </Route>
     )
   )

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function AuthForm() {
     const [isLogin, setIsLogin] = useState(true); // True for login, false for signup
@@ -13,14 +14,42 @@ function AuthForm() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (isLogin) {
-            console.log('Logging in with:', formData.email, formData.password);
-            // Implement login logic here
+            // Login
+            try {
+                const response = await axios.post('/api/auth/login', {
+                    email: formData.email,
+                    password: formData.password,
+                });
+    
+                // Save the token to localStorage or context for session management
+                localStorage.setItem('userToken', response.data.token);
+    
+                // Redirect or perform further actions
+                console.log('Login successful:', response.data);
+                alert('Login successful');
+                
+            } catch (error) {
+                console.error('Error logging in:', error.response.data);
+                alert(error.response.data.message);
+            }
         } else {
-            console.log('Signing up with:', formData);
-            // Implement signup logic here
+            // Signup
+            try {
+                const response = await axios.post('/api/auth/signup', formData);
+    
+                // Save the token to localStorage or context for session management
+                localStorage.setItem('userToken', response.data.token);
+    
+                // Redirect or perform further actions
+                console.log('Signup successful:', response.data);
+                alert('Registration successful');
+            } catch (error) {
+                console.error('Error signing up:', error.response.data);
+                alert(error.response.data.message);
+            }
         }
     };
 

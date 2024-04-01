@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { useSelector } from 'react-redux';
+import { useAuth } from '../hooks/useAuth'; // Make sure this path matches where your useAuth hook is located
 
 function TrucksPage() {
+    const navigate = useNavigate();
+    const { isAuthenticated } = useAuth(); // Use the useAuth hook to check authentication status
     const trucks = useSelector(state => state.trucks);
     const [searchTerm, setSearchTerm] = useState('');
     const [displayTrucks, setDisplayTrucks] = useState(trucks);
@@ -21,6 +24,14 @@ function TrucksPage() {
                 truck.name.toLowerCase().includes(term.toLowerCase())
             );
             setDisplayTrucks(filteredTrucks);
+        }
+    };
+
+    const handleRent = (truckId) => {
+        if (!isAuthenticated) {
+            navigate('/Login/Signup'); // Redirect to the login/signup page if not authenticated
+        } else {
+            navigate(`/trucks/${truckId}`); // Proceed to bike detail page if authenticated
         }
     };
 
@@ -43,12 +54,12 @@ function TrucksPage() {
                         <h2 className="text-xl font-semibold">{truck.name}</h2>
                         <p>{truck.description}</p>
                         <span className="text-sm text-gray-400">{truck.type} - ${truck.farePricePerKm}/KM</span>
-                        <NavLink
-                            to={`/trucks/${truck.id}`}
+                        <button
+                            onClick={() => handleRent(truck.id)}
                             className="mt-auto w-96 bg-black text-white p-2 hover:bg-gray-900 rounded-lg flex justify-center items-center"
                         >
                             Rent
-                        </NavLink>
+                        </button>
                     </div>
                 ))}
             </div>
