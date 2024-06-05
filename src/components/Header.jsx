@@ -2,10 +2,11 @@ import React from 'react';
 
 function Header() {
   return (
-    <header className="bg-blue-600 w-full py-6">
-      <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-white text-3xl font-bold ml-3">RAG rentals</h1>
-        <p className="text-white italic mr-3">Your journey starts here</p>
+    <header className="bg-gradient-to-l from-black to-brandYellow w-full py-6 shadow-xl">
+      <div className="container mx-auto text-center">
+        <p className="text-white italic text-xl md:text-3xl font-semibold transform motion-safe:hover:scale-105 transition duration-500 ease-in-out">
+          Your journey starts here
+        </p>
       </div>
     </header>
   );

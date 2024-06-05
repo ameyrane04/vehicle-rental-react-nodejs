@@ -1,5 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+
 
 function DeliveryInfoPage() {
   const { state } = useLocation();
